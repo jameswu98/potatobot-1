@@ -127,6 +127,17 @@ if you rewire the robot - the values are all stored in one place.
   the x speed (*vX*), the yaw rate/z axis rotation rate (*vZ*) and
   the throttle. vX and vZ all must be between +/-1, while the throttle
   should be between 0 and 1
+  * You are going to want to add up the X speed and the Z rotation in a
+    specific way for each wheel in order to produce the desired speed for each
+    wheel.
+  * Once you have added them up, they will sometimes be outside the +/- 1
+    bounds, so you are going to need to re-scale them so that they are between
+    +/- 1
+  * The final step is to actually set the speed on each of the motors, find out
+    how to do this yourself using the API docs above...
+* Once you have created the Drive() method, you will need to put it into the
+  Potatobot.cpp and Potatobot.h files in order to make it accessable to
+  commands.
 
 ### Create a DriveFromJoystick Command
 * This command should read the current joystick position from the OI, and send appropriate
@@ -134,14 +145,19 @@ values (speed and yaw rate) to the *Drive()* method of the chassis subsystem.
 * Make this command the default command for the chassis subsystem.
 
 ### Create a DriveForTime Command
+When you are in an FRC competition, there is an *Autonomous Mode* at the
+beginning of the game. During this period, robots are not controlled by
+operators, and rather have to use their programming to complete objectives.
 * When this command starts running, we want to use the chassis's *drive()* method to set a speed.
-We also want to set the timeout for the command.
+  We also want to set the timeout for the command.
 * When the command is running it doesn't need to do anything - just wait for the timeout.
 * The *IsFinished()* method should return the value of whether the command has timed out or not.
-(Look up the API docs for this!) 
+  (Look up the API docs for this!) 
 * When the command has ended, call the chassis's *Drive()* method to stop the motors.
-* Make this command run when the robot is in autonomous mode,
-and when a joystick button is pressed (your choice of button!)
+* Make this command run when the robot is in autonomous mode, and when a 
+  joystick button is pressed (your choice of button!)
+* You are going to need to create the command in Potatobot.cpp and Potatobot.h,
+  so you should be able to figure out how to do that by using the examples.
 
 ## Deploy to the roboRIO
 Putting your code on the roboRIO is straightforward.
