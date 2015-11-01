@@ -123,9 +123,10 @@ Some common motor controller classes:
 * Create *instances* of the appropriate motor controller class for the chassis hardware you are using.
 Set the motor controller connection IDs in the *RobotMap.h* file - this makes changing things easier
 if you rewire the robot - the values are all stored in one place.
-* Create a *Drive()* method that takes two *arguments* - the speed and yaw rate. This method turns these
-commanded values into speeds for each motor controller. Remember that the values to the motor controller
-must be between +/-1.
+* Create a *Drive()* method in the Chassis subsystem that takes four arguments-
+  the x speed (*vX*), the yaw rate/z axis rotation rate (*vZ*) and
+  the throttle. vX and vZ all must be between +/-1, while the throttle
+  should be between 0 and 1
 
 ### Create a DriveFromJoystick Command
 * This command should read the current joystick position from the OI, and send appropriate
