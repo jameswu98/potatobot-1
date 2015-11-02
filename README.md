@@ -123,8 +123,9 @@ Some common motor controller classes:
 * Create *instances* of the appropriate motor controller class for the chassis hardware you are using.
 Set the motor controller connection IDs in the *RobotMap.h* file - this makes changing things easier
 if you rewire the robot - the values are all stored in one place.
-* Create a *Drive()* method in the Chassis subsystem that takes four arguments-
-  the x speed (*vX*), the yaw rate/z axis rotation rate (*vZ*) and
+* Copy the *ExampleSubsystem.cpp* and *ExampleSubsystem.h* files and rename them to *Chassis.cpp/h*.
+* Change the class name to *Chassis*. (C++ is case sensitive - all classes should start with a capital letter).
+* Create a *Drive()* method that takes three *arguments* - the x speed (*vX*), the yaw rate/z axis rotation rate (*vZ*) and
   the throttle. vX and vZ all must be between +/-1, while the throttle
   should be between 0 and 1
   * You are going to want to add up the X speed and the Z rotation in a
@@ -135,29 +136,37 @@ if you rewire the robot - the values are all stored in one place.
     +/- 1
   * The final step is to actually set the speed on each of the motors, find out
     how to do this yourself using the API docs above...
-* Once you have created the Drive() method, you will need to put it into the
-  Potatobot.cpp and Potatobot.h files in order to make it accessable to
-  commands.
+* Build your code to check it compiles cleanly.
+* Make a *git* commit to save your progress so far.
 
 ### Create a DriveFromJoystick Command
 * This command should read the current joystick position from the OI, and send appropriate
 values (speed and yaw rate) to the *Drive()* method of the chassis subsystem.
+  * You will need to create an instance of a *Joystick* class in the *OI* instance in order to get the joystick position.
+  * You will also need to do some calculations to go from joystick axes to robot axes. For the joystick
+right is positive X, and forward is positive Y.
+* Copy the *ExampleCommand.cpp* and *ExampleCommand.h* files and rename them to *DriveFromJoystick.cpp/h*.
+* Change the class name to *DriveFromJoystick*. (C++ is case sensitive - all classes should start with a capital letter).
 * Make this command the default command for the chassis subsystem.
+* Build your code to check it compiles cleanly.
+* Make a *git* commit to save your progress so far.
 
 ### Create a DriveForTime Command
 When you are in an FRC competition, there is an *Autonomous Mode* at the
 beginning of the game. During this period, robots are not controlled by
 operators, and rather have to use their programming to complete objectives.
-* When this command starts running, we want to use the chassis's *drive()* method to set a speed.
-  We also want to set the timeout for the command.
+* Copy the *ExampleCommand.cpp* and *ExampleCommand.h* files and rename them to *DriveForTime.cpp/h*.
+* Change the class name to *DriveForTime*. (C++ is case sensitive - all classes should start with a capital letter).
+* When this command starts running, we want to use the chassis's *Drive()* method to set a speed.
+We also want to set the timeout for the command.
 * When the command is running it doesn't need to do anything - just wait for the timeout.
 * The *IsFinished()* method should return the value of whether the command has timed out or not.
-  (Look up the API docs for this!) 
+(Look up the API docs for this!) 
 * When the command has ended, call the chassis's *Drive()* method to stop the motors.
-* Make this command run when the robot is in autonomous mode, and when a 
-  joystick button is pressed (your choice of button!)
-* You are going to need to create the command in Potatobot.cpp and Potatobot.h,
-  so you should be able to figure out how to do that by using the examples.
+* Make this command run when the robot is in autonomous mode,
+and when a joystick button is pressed (your choice of button!)
+* Build your code to check it compiles cleanly.
+* Make a *git* commit to save your progress so far.
 
 ## Deploy to the roboRIO
 Putting your code on the roboRIO is straightforward.
