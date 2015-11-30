@@ -15,7 +15,7 @@ private:
 public:
     Chassis();
     ~Chassis();
-    void Drive(double vX, double vY, double vZ, double Throttle);
+    void Drive(double vX, double vZ, double Throttle);
     void InitDefaultCommand();
 };
 

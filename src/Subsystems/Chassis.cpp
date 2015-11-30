@@ -9,17 +9,24 @@ Chassis::Chassis() : Subsystem("Chassis")
     motor_d = new Talon(Motor_d_Pos);
 }
 
-void Chassis::Drive(double vX, double vY, double vZ, double Throttle) {
+Chassis::~Chassis() {
+    delete motor_a;
+    delete motor_b;
+    delete motor_c;
+    delete motor_d;
+}
+
+void Chassis::Drive(double vX, double vZ, double Throttle) {
     //Set up variables for each motor
     double mA;
     double mB;
     double mC;
     double mD;
 
-    mA = vX - vZ + vY;
-    mB = vX - vZ + vY;
-    mC = -vX + vZ - vY;
-    mD = -vX + vZ - vY;
+    mA = vX - vZ;
+    mB = vX - vZ;
+    mC = -vX + vZ;
+    mD = -vX + vZ;
 
     double array [] = {mA, mB, mC, mD};
 
